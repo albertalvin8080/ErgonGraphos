@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConnectionFactory
 {
-    private static final String URL = "jdbc:mysql://localhost:3306/db_javateste";
+    private static final String URL = "jdbc:mysql://localhost:3306/ergon_graphos";
     private static final String USER = "root";
     private static final String PASSWORD = "root";
     private static Connection INSTANCE;
