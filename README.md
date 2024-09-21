@@ -1,5 +1,4 @@
 # ErgonGraphos
-<hr>
 
 ## Etymology
 
