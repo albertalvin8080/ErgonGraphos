@@ -98,7 +98,7 @@ public class SectorRepository implements IRepository<Sector, Integer>
                 GROUP BY 
                     s.sector_name, r.report_date, p.problem_description
                 ORDER BY 
-                    r.report_date, s.sector_name;
+                    s.sector_name, r.report_date;
                 """;
 
         List<SectorDiaryReport> sectorDiaryReportList = new ArrayList<>();
@@ -147,7 +147,7 @@ public class SectorRepository implements IRepository<Sector, Integer>
                 GROUP BY 
                     s.sector_name, r.report_date, p.problem_description
                 ORDER BY 
-                    r.report_date, s.sector_name;
+                    s.sector_name, r.report_date;
                 """;
 
         try (final PreparedStatement pstm = ConnectionFactory.getConnection().prepareStatement(sql))
