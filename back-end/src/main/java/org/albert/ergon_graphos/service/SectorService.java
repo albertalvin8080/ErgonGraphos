@@ -2,7 +2,7 @@ package org.albert.ergon_graphos.service;
 
 import lombok.RequiredArgsConstructor;
 import org.albert.ergon_graphos.entity.Sector;
-import org.albert.ergon_graphos.entity.dto.SectorDiaryReport;
+import org.albert.ergon_graphos.entity.dto.SectorDailyReport;
 import org.albert.ergon_graphos.repository.SectorRepository;
 import org.springframework.stereotype.Service;
 
@@ -51,11 +51,11 @@ public class SectorService
         }
     }
 
-    public List<SectorDiaryReport> readSectorDiaryReport(Integer id)
+    public List<SectorDailyReport> readSectorDailyReport(Integer id)
     {
         try
         {
-            return sectorRepository.readSectorDiaryReport(id);
+            return sectorRepository.readSectorDailyReport(id);
         }
         catch (SQLException e)
         {

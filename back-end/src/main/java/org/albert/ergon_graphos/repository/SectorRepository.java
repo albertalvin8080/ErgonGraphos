@@ -2,7 +2,7 @@ package org.albert.ergon_graphos.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.albert.ergon_graphos.entity.Sector;
-import org.albert.ergon_graphos.entity.dto.SectorDiaryReport;
+import org.albert.ergon_graphos.entity.dto.SectorDailyReport;
 import org.albert.ergon_graphos.repository.connection.ConnectionFactory;
 import org.albert.ergon_graphos.repository.contract.IRepository;
 import org.albert.ergon_graphos.service.DateConverter;
@@ -77,7 +77,7 @@ public class SectorRepository implements IRepository<Sector, Integer>
         return sectorList;
     }
 
-    public List<SectorDiaryReport> readSectorDiaryReport(Integer sectorId) throws SQLException
+    public List<SectorDailyReport> readSectorDailyReport(Integer sectorId) throws SQLException
     {
         String sql = """
                 SELECT
@@ -101,7 +101,7 @@ public class SectorRepository implements IRepository<Sector, Integer>
                     s.sector_name, r.report_date;
                 """;
 
-        List<SectorDiaryReport> sectorDiaryReportList = new ArrayList<>();
+        List<SectorDailyReport> sectorDailyReportList = new ArrayList<>();
 
         try (final PreparedStatement pstm = ConnectionFactory.getConnection().prepareStatement(sql))
         {
@@ -110,7 +110,7 @@ public class SectorRepository implements IRepository<Sector, Integer>
 
             while (resultSet.next())
             {
-                final SectorDiaryReport build = SectorDiaryReport
+                final SectorDailyReport build = SectorDailyReport
                         .builder()
                         .reportCount(resultSet.getInt("report_count"))
                         .sectorName(resultSet.getString("sector_name"))
@@ -119,16 +119,16 @@ public class SectorRepository implements IRepository<Sector, Integer>
                                 resultSet.getDate("report_date")
                         ))
                         .build();
-                sectorDiaryReportList.add(build);
+                sectorDailyReportList.add(build);
             }
         }
 
-        return sectorDiaryReportList;
+        return sectorDailyReportList;
     }
 
-    public List<SectorDiaryReport> readAllSectorDiaryReport() throws SQLException
+    public List<SectorDailyReport> readAllSectorDailyReport() throws SQLException
     {
-        List<SectorDiaryReport> sectorDiaryReportList = new ArrayList<>();
+        List<SectorDailyReport> sectorDailyReportList = new ArrayList<>();
 
         String sql = """
                 SELECT
@@ -155,7 +155,7 @@ public class SectorRepository implements IRepository<Sector, Integer>
             final ResultSet resultSet = pstm.executeQuery();
             while (resultSet.next())
             {
-                final SectorDiaryReport build = SectorDiaryReport
+                final SectorDailyReport build = SectorDailyReport
                         .builder()
                         .reportCount(resultSet.getInt("report_count"))
                         .sectorName(resultSet.getString("sector_name"))
@@ -164,10 +164,10 @@ public class SectorRepository implements IRepository<Sector, Integer>
                                 resultSet.getDate("report_date")
                         ))
                         .build();
-                sectorDiaryReportList.add(build);
+                sectorDailyReportList.add(build);
             }
         }
 
-        return sectorDiaryReportList;
+        return sectorDailyReportList;
     }
 }

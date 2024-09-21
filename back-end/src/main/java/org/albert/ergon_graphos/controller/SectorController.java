@@ -2,9 +2,8 @@ package org.albert.ergon_graphos.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.albert.ergon_graphos.entity.Sector;
-import org.albert.ergon_graphos.entity.dto.SectorDiaryReport;
+import org.albert.ergon_graphos.entity.dto.SectorDailyReport;
 import org.albert.ergon_graphos.service.SectorService;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -46,10 +45,10 @@ public class SectorController
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(path = "/diary-report/{id}")
-    public ResponseEntity<List<SectorDiaryReport>> readSectorDiaryReport(@PathVariable("id") Integer id)
+    @GetMapping(path = "/daily-report/{id}")
+    public ResponseEntity<List<SectorDailyReport>> readSectorDailyReport(@PathVariable("id") Integer id)
     {
-        final List<SectorDiaryReport> sectorDiaryReportList = sectorService.readSectorDiaryReport(id);
-        return ResponseEntity.ok(sectorDiaryReportList);
+        final List<SectorDailyReport> sectorDailyReportList = sectorService.readSectorDailyReport(id);
+        return ResponseEntity.ok(sectorDailyReportList);
     }
 }

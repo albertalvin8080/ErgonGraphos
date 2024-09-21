@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SectorDiaryReport
+public class SectorDailyReport
 {
     private Integer reportCount;
     private String sectorName;
