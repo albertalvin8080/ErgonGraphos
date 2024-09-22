@@ -1,14 +1,15 @@
 @charset "UTF-8";
 
 :root {
-    --color1: #EAD8B1;  
-    --color2: #001F3F;  
-    --color3: #3A6D8C;  
-    --color4: #6A9AB0; 
-    --color5: #41856A; 
-    --color6: #73D2CC; 
-    --color7: #; 
-    --color8: #; 
+    --color0: #f6e8ca;
+    --color1: #EAD8B1;
+    --color2: #001F3F;
+    --color3: #3A6D8C;
+    --color4: #6A9AB0;
+    --color5: #41856A;
+    --color6: #73D2CC;
+    --color7: #;
+    --color8: #;
 }
 
 *,
@@ -27,54 +28,69 @@ body {
     margin: 0;
 }
 
-#home h1, #new-sector h2 {
+/* #home h1, #new-sector h2, #new-employee h2 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+} */
+
+#home h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
-
 
 .nav-tabs {
     border-bottom: 2px solid var(--color1);
 }
 
-.nav-link
-{
+.nav-link {
     font-size: 20px;
 }
 
-.nav-link:not(.active)
-{
+.nav-link:not(.active) {
     color: white;
 }
 
-.accordion-item, .accordion-button
-{
+.nav-item {
+    cursor: pointer;
+}
+
+.nav-link.active {
+    background-color: var(--color0) !important;
+    border-color: var(--color0) !important;
+}
+
+.accordion-item,
+.accordion-button {
     color: white;
     background-color: var(--color4);
 }
 
-.accordion-item:focus, .accordion-button:focus-visible, .accordion-button:focus-within
-{
+.accordion-body {
+    background-color: var(--color3);
+}
+
+.accordion-item:focus,
+.accordion-button:focus-visible,
+.accordion-button:focus-within {
     box-shadow: none;
 }
 
-#new-sector
-{
+#new-sector,
+#new-employee {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-#new-sector-btn
-{
+#new-sector-btn,
+#new-employee-btn {
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     background-color: var(--color6);
     transition: background-color 0.1s ease, color 0.1s ease;
 }
 
-#new-sector-btn:hover
-{
+#new-sector-btn:hover,
+#new-employee-btn:hover {
     color: white;
     background-color: var(--color5);
 }
@@ -92,3 +108,16 @@ body {
     visibility: visible;
 }
 
+#sector-toggler-btn {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: var(--color6);
+    transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+#sectorModal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

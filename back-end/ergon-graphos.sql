@@ -51,7 +51,7 @@ VALUES ('Printed Circuit Board (PCB) assembly'),
 ;
 
 INSERT INTO employee (employee_name, employee_sector_id)
-VALUES ('Alya Kujo', 3),
+VALUES ('Alyssa Kujo', 3),
        ('Franz Bonaparta', 1),
        ('Radagon Golden', 5),
        ('Johan Feige', 6),
