@@ -73,13 +73,13 @@ body {
     box-shadow: none;
 }
 
-#new-sector,
+/* #new-sector,
 #new-employee {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
+} */
 
 #new-sector-btn,
 #new-employee-btn {
@@ -93,6 +93,10 @@ body {
 #new-employee-btn:hover {
     color: white;
     background-color: var(--color5);
+}
+
+.my-absolute {
+    position: absolute;
 }
 
 .my-fade {
@@ -115,9 +119,19 @@ body {
     transition: background-color 0.1s ease, color 0.1s ease;
 }
 
-#sectorModal {
+/* #sectorModal {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+} */
+
+.modal {
+    z-index: 1055 !important;
+    /* Higher than the backdrop */
+}
+
+.modal-backdrop {
+    z-index: 1045 !important;
+    /* Default for the backdrop */
 }

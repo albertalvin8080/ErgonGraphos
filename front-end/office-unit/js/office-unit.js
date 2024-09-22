@@ -1,7 +1,6 @@
 "use strict";
 
 // ------------------- TABS -------------------
-
 const homeDiv = document.querySelector("#home");
 const homeNav = document.querySelector("#home-nav");
 const newSectorDiv = document.querySelector("#new-sector");
@@ -12,34 +11,30 @@ const newEmployeeNav = document.querySelector("#new-employee-nav");
 let previousItem = homeDiv; // homeDiv starts visible
 let previousNav = homeNav;
 
-homeNav.addEventListener("click", () => {
-	previousItem.classList.remove("my-show");
+function changeItem(newItem, newNav) {
 	previousNav.classList.remove("active");
-
-	previousItem = homeDiv;
-	previousNav = homeNav;
+	previousItem.classList.remove("my-show");
+	previousItem.classList.remove("flex-column-1");
+	previousItem.classList.add("my-absolute");
+	
+	previousItem = newItem;
+	previousNav = newNav;
+	previousNav.classList.add("flex-column-1");
+	previousItem.classList.add("active");
+	previousItem.classList.remove("my-absolute");
 	previousItem.classList.add("my-show");
-	previousNav.classList.add("active");
+}
+
+homeNav.addEventListener("click", () => {
+	changeItem(homeDiv, homeNav);
 });
 
 newSectorNav.addEventListener("click", () => {
-	previousItem.classList.remove("my-show");
-	previousNav.classList.remove("active");
-
-	previousItem = newSectorDiv;
-	previousNav = newSectorNav;
-	previousItem.classList.add("my-show");
-	previousNav.classList.add("active");
+	changeItem(newSectorDiv, newSectorNav);
 });
 
 newEmployeeNav.addEventListener("click", () => {
-	previousItem.classList.remove("my-show");
-	previousNav.classList.remove("active");
-
-	previousItem = newEmployeeDiv;
-	previousNav = newEmployeeNav;
-	previousItem.classList.add("my-show");
-	previousNav.classList.add("active");
+	changeItem(newEmployeeDiv, newEmployeeNav);
 });
 
 // !------------------- TABS -------------------
@@ -119,32 +114,6 @@ newSectorForm.addEventListener("submit", async (evt) => {
 // !------------------- NEW SECTOR -------------------
 
 // ------------------- NEW EMPLOYEE -------------------
-newEmployeeForm.addEventListener("submit", async (evt) => {
-	const newEmployee = handleForm(evt, newEmployeeForm);
-	if (newEmployee === null) {
-		return;
-	}
-
-	let response = null;
-	try {
-		response = await fetch("http://localhost:8080/employee/create", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(newEmployee),
-		});
-	} catch (e) {
-		showDangerToast();
-		return;
-	}
-
-	if (response.status === 201) {
-		showSuccesToast();
-		homeNav.click();
-	} else {
-		showDangerToast();
-	}
-});
-
 // Sectors modal
 const sectorCheck = document.getElementById("sectorCheck");
 sectorCheck.addEventListener("click", (event) => {
@@ -155,8 +124,8 @@ const sectorModalBody = document.querySelector("#sector-modal-inner-body");
 const sectorCheckStringModel = `
 <div class="col-12">
 	<div class="form-check">
-		<input class="form-check-input" type="radio" name="sector"
-			value="s__id__" id="s__id__">
+		<input class="form-check-input" type="radio" name="sectorId"
+			value="__id__" id="s__id__">
 		<label class="form-check-label" for="s__id__" style="color: initial;">
 			__name__
 		</label>
@@ -165,13 +134,30 @@ const sectorCheckStringModel = `
 `;
 
 (async function fetchSectors() {
-	const response = await fetch("http://localhost:8080/sector/all", {
-		method: "GET",
-		headers: {
-			Accept: "application/json;charset=utf-8",
-		},
-	});
-	const sectors = await response.json();
+	let response = null;
+	let sectors = null;
+	try {
+		response = await fetch("http://localhost:8080/sector/all", {
+			method: "GET",
+			headers: {
+				Accept: "application/json;charset=utf-8",
+			},
+		});
+		sectors = await response.json();
+	} catch (e) {
+		console.error(e);
+		sectors = [
+			{ name: "Printed Circuit Board (PCB) assembly", id: 1 },
+			{ name: "Component Soldering", id: 2 },
+			{ name: "Circuit Testing", id: 3 },
+			{ name: "Casing", id: 4 },
+			{ name: "Battery", id: 5 },
+			{ name: "Screen and Display", id: 6 },
+			{ name: "Software", id: 7 },
+			{ name: "Quality Control", id: 8 },
+		];
+	}
+
 	console.log(sectors);
 
 	sectors.forEach((sector) => {
@@ -199,5 +185,36 @@ const sectorCheckStringModel = `
 		}
 	});
 })();
+
+newEmployeeForm.addEventListener("submit", async (evt) => {
+	const newEmployee = handleForm(evt, newEmployeeForm);
+	if (newEmployee === null) {
+		return;
+	}
+
+	// newEmployee["sectorId"] = document.querySelector(
+	// 	"#sectorModal input.form-check-input:checked"
+	// ).value;
+	console.log(newEmployee);
+
+	let response = null;
+	try {
+		response = await fetch("http://localhost:8080/employee/create", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(newEmployee),
+		});
+	} catch (e) {
+		showDangerToast();
+		return;
+	}
+
+	if (response.status === 201) {
+		showSuccesToast();
+		homeNav.click();
+	} else {
+		showDangerToast();
+	}
+});
 
 // !------------------- NEW EMPLOYEE -------------------
