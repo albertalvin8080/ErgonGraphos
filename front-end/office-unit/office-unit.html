@@ -106,12 +106,12 @@
 
             <label class="form-label text-start fs-5" style="width: 40%;">Choose a sector</label>
             <div class="mb-4 d-flex align-items-center flex-row gap-4" style="width: 40%;">
-                <button type="button" class="btn btn-lg d-block" data-bs-toggle="modal" data-bs-target="#sectorModal"
+                <button type="button" class="btn btn-lg flex-grow-1" data-bs-toggle="modal" data-bs-target="#sectorModal"
                     id="sector-toggler-btn">
                     Sectors
                 </button>
                 <input class="form-check-input" id="sectorCheck" type="checkbox" required />
-                <div class="invalid-feedback">Please, choose a sector.</div>
+                <!-- <div class="invalid-feedback">Please, choose a sector.</div> -->
             </div>
 
             <!-- Modal -->
@@ -120,7 +120,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="sectorModalLabel">Escolha os métodos de fila</h1>
+                            <h1 class="modal-title fs-5 text-black" id="sectorModalLabel">Sectors</h1>
                             <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
                         </div>
                         <div class="modal-body" id="sectorModalBody" style="max-height: 500px; overflow-y: auto;">

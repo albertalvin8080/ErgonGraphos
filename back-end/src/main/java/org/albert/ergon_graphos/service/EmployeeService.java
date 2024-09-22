@@ -8,6 +8,8 @@ import org.albert.ergon_graphos.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -20,10 +22,9 @@ public class EmployeeService
         try
         {
             final Sector sector = Sector.builder()
-                    .id(employeeDto.getId())
+                    .id(employeeDto.getSectorId())
                     .build();
             final Employee employee = Employee.builder()
-                    .id(employeeDto.getId())
                     .name(employeeDto.getName())
                     .sector(sector)
                     .build();
@@ -32,6 +33,19 @@ public class EmployeeService
         catch (SQLException e)
         {
             throw new RuntimeException(e);
+        }
+    }
+
+    public List<Employee> readAll()
+    {
+        try
+        {
+            return employeeRepository.readAll();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 }

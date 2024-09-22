@@ -16,7 +16,7 @@ function changeItem(newItem, newNav) {
 	previousItem.classList.remove("my-show");
 	previousItem.classList.remove("flex-column-1");
 	previousItem.classList.add("my-absolute");
-	
+
 	previousItem = newItem;
 	previousNav = newNav;
 	previousNav.classList.add("flex-column-1");
@@ -49,13 +49,13 @@ const successToast = new bootstrap.Toast(
 );
 const successToastBody = document.querySelector("#success-toast .toast-body");
 
-function showDangerToast() {
-	dangerToastBody.innerText = "Something bad happened. Try again later.";
+function showDangerToast(msg) {
+	dangerToastBody.innerText = msg;
 	dangerToast.show();
 }
 
-function showSuccesToast() {
-	successToastBody.innerText = "Sector succesfully registered!";
+function showSuccesToast(msg) {
+	successToastBody.innerText = msg;
 	successToast.show();
 }
 
@@ -100,24 +100,30 @@ newSectorForm.addEventListener("submit", async (evt) => {
 			body: JSON.stringify(newSector),
 		});
 	} catch (e) {
-		showDangerToast();
+		showDangerToast("Something bad happened. Try again later.");
 		return;
 	}
 
 	if (response.status === 201) {
-		showSuccesToast();
+		showSuccesToast("Sector succesfully registered!");
 		homeNav.click();
 	} else {
-		showDangerToast();
+		showDangerToast("Something bad happened. Try again later.");
 	}
 });
 // !------------------- NEW SECTOR -------------------
 
 // ------------------- NEW EMPLOYEE -------------------
 // Sectors modal
-const sectorCheck = document.getElementById("sectorCheck");
-sectorCheck.addEventListener("click", (event) => {
-	event.preventDefault();
+let sectorCheck = document.getElementById("sectorCheck");
+// Used for preventing the checkbox to be already checked in case of page reload.
+document.addEventListener("DOMContentLoaded", () => {
+	sectorCheck = document.getElementById("sectorCheck"); // YES, it's necessary to redo this.
+	sectorCheck.checked = false; // Ensure the checkbox is always unchecked on page load
+
+	sectorCheck.addEventListener("click", (event) => {
+		event.preventDefault(); // Prevent the checkbox from being checked on click
+	});
 });
 
 const sectorModalBody = document.querySelector("#sector-modal-inner-body");
@@ -132,6 +138,12 @@ const sectorCheckStringModel = `
 	</div>
 </div>
 `;
+
+let sectorModalFooterButton = document.querySelector(
+	"#sectorModalFooterButton"
+);
+let sectorModal = new bootstrap.Modal(document.getElementById("sectorModal"));
+let sectorModalCheckInputs = null;
 
 (async function fetchSectors() {
 	let response = null;
@@ -167,24 +179,18 @@ const sectorCheckStringModel = `
 		sectorModalBody.innerHTML += div;
 	});
 
-	const sectorModalFooterButton = document.querySelector(
-		"#sectorModalFooterButton"
-	);
-	const sectorModalCheckInputs = [
+	sectorModalCheckInputs = [
 		...document.querySelectorAll("#sectorModalBody .form-check-input"),
 	];
-	const sectorModal = new bootstrap.Modal(
-		document.getElementById("sectorModal")
-	);
-
-	sectorModalFooterButton.addEventListener("click", (e) => {
-		if (sectorModalCheckInputs.some((i) => i.checked)) {
-			sectorCheck.checked = true;
-		} else {
-			sectorCheck.checked = false;
-		}
-	});
 })();
+
+sectorModalFooterButton.addEventListener("click", (e) => {
+	if (sectorModalCheckInputs.some((i) => i.checked)) {
+		sectorCheck.checked = true;
+	} else {
+		sectorCheck.checked = false;
+	}
+});
 
 newEmployeeForm.addEventListener("submit", async (evt) => {
 	const newEmployee = handleForm(evt, newEmployeeForm);
@@ -192,6 +198,8 @@ newEmployeeForm.addEventListener("submit", async (evt) => {
 		return;
 	}
 
+	// Old code for when the model was outside of the form. The logic is wrong, by the way.
+	// It sould be inside handleForm(...)(?)
 	// newEmployee["sectorId"] = document.querySelector(
 	// 	"#sectorModal input.form-check-input:checked"
 	// ).value;
@@ -205,15 +213,15 @@ newEmployeeForm.addEventListener("submit", async (evt) => {
 			body: JSON.stringify(newEmployee),
 		});
 	} catch (e) {
-		showDangerToast();
+		showDangerToast("Something bad happened. Try again later.");
 		return;
 	}
 
 	if (response.status === 201) {
-		showSuccesToast();
+		showSuccesToast("Employee succesfully registered!");
 		homeNav.click();
 	} else {
-		showDangerToast();
+		showDangerToast("Something bad happened. Try again later.");
 	}
 });
 
