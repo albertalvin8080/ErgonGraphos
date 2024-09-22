@@ -23,6 +23,9 @@
 
 body {
     background-image: linear-gradient(to top right, var(--color1), var(--color2));
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     width: 100%;
     height: 100vh;
     margin: 0;
@@ -97,17 +100,21 @@ body {
 
 .my-absolute {
     position: absolute;
+    height: 0px;
+    /* This prevents the hidden tab size from messing with the layout */
 }
 
 .my-fade {
     opacity: 0;
-    /* transform: translateY(-20px);  */
+    /* Unfortunately, this makes the modal to behave incorrectly. */
+    /* transform: translateY(-25px);  */
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
     visibility: hidden;
 }
 
 .my-fade.my-show {
     opacity: 1;
+    /* Unfortunately, this makes the modal to behave incorrectly. */
     /* transform: translateY(0); */
     visibility: visible;
 }

@@ -7,11 +7,15 @@ const newSectorDiv = document.querySelector("#new-sector");
 const newSectorNav = document.querySelector("#new-sector-nav");
 const newEmployeeDiv = document.querySelector("#new-employee");
 const newEmployeeNav = document.querySelector("#new-employee-nav");
+const sectorReportsDiv = document.querySelector("#sector-reports");
+const sectorReportsNav = document.querySelector("#sector-reports-nav");
 
 let previousItem = homeDiv; // homeDiv starts visible
-let previousNav = homeNav;
+let previousNav = homeNav;  // homeNav starts active
 
 function changeItem(newItem, newNav) {
+	if (newItem === previousItem) return;
+
 	previousNav.classList.remove("active");
 	previousItem.classList.remove("my-show");
 	previousItem.classList.remove("flex-column-1");
@@ -19,8 +23,8 @@ function changeItem(newItem, newNav) {
 
 	previousItem = newItem;
 	previousNav = newNav;
-	previousNav.classList.add("flex-column-1");
-	previousItem.classList.add("active");
+	previousNav.classList.add("active");
+	previousItem.classList.add("flex-column-1");
 	previousItem.classList.remove("my-absolute");
 	previousItem.classList.add("my-show");
 }
@@ -35,6 +39,10 @@ newSectorNav.addEventListener("click", () => {
 
 newEmployeeNav.addEventListener("click", () => {
 	changeItem(newEmployeeDiv, newEmployeeNav);
+});
+
+sectorReportsNav.addEventListener("click", () => {
+	changeItem(sectorReportsDiv, sectorReportsNav);
 });
 
 // !------------------- TABS -------------------
@@ -127,12 +135,24 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const sectorModalBody = document.querySelector("#sector-modal-inner-body");
+const sectorFilterModalBody = document.querySelector("#sectorFilterModalInnerBody");
 const sectorCheckStringModel = `
 <div class="col-12">
 	<div class="form-check">
 		<input class="form-check-input" type="radio" name="sectorId"
 			value="__id__" id="s__id__">
 		<label class="form-check-label" for="s__id__" style="color: initial;">
+			__name__
+		</label>
+	</div>
+</div>
+`;
+const sectorFilterCheckStringModel = `
+<div class="col-12">
+	<div class="form-check">
+		<input class="form-check-input" type="radio" name="sectorId"
+			value="__id__" id="fs__id__">
+		<label class="form-check-label" for="fs__id__" style="color: initial;">
 			__name__
 		</label>
 	</div>
@@ -173,10 +193,15 @@ let sectorModalCheckInputs = null;
 	console.log(sectors);
 
 	sectors.forEach((sector) => {
-		const div = sectorCheckStringModel
+		const div1 = sectorCheckStringModel
 			.replace(/__id__/g, sector.id)
 			.replace(/__name__/g, sector.name);
-		sectorModalBody.innerHTML += div;
+		sectorModalBody.innerHTML += div1;
+
+		const div2 = sectorFilterCheckStringModel
+			.replace(/__id__/g, sector.id)
+			.replace(/__name__/g, sector.name);
+		sectorFilterModalBody.innerHTML += div2;
 	});
 
 	sectorModalCheckInputs = [

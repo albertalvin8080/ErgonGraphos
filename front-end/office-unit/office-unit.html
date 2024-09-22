@@ -23,7 +23,7 @@
             <a class="nav-link" id="new-employee-nav">New Employee</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="sector-reports-tab">Sector Reports</a>
+            <a class="nav-link" id="sector-reports-nav">Sector Reports</a>
         </li>
     </ul>
 
@@ -98,7 +98,8 @@
         <div>
             <h2 class="text-center display-3 mb-5">Employee Registration</h2>
         </div>
-        <form class="w-100 needs-validation d-flex justify-content-center align-items-center flex-column" novalidate id="new-employee-form">
+        <form class="w-100 needs-validation d-flex justify-content-center align-items-center flex-column" novalidate
+            id="new-employee-form">
             <div class="mb-4" style="width: 40%;">
                 <label for="employee-name" class="form-label fs-5">Name</label>
                 <input type="text" name="name" id="employee-name" class="form-control" required>
@@ -106,8 +107,8 @@
 
             <label class="form-label text-start fs-5" style="width: 40%;">Choose a sector</label>
             <div class="mb-4 d-flex align-items-center flex-row gap-4" style="width: 40%;">
-                <button type="button" class="btn btn-lg flex-grow-1" data-bs-toggle="modal" data-bs-target="#sectorModal"
-                    id="sector-toggler-btn">
+                <button type="button" class="btn btn-lg flex-grow-1" data-bs-toggle="modal"
+                    data-bs-target="#sectorModal" id="sector-toggler-btn">
                     Sectors
                 </button>
                 <input class="form-check-input" id="sectorCheck" type="checkbox" required />
@@ -143,6 +144,77 @@
             </div>
         </form>
     </div>
+
+    <div id="sector-reports"
+        class="flex-grow-1 d-flex justify-content-center align-items-center text-white flex-column my-fade my-absolute">
+        <div>
+            <h2 class="text-center display-3 mb-4">Sector Reports</h2>
+        </div>
+        <button type="button" class="text-white btn btn-dark btn-lg mb-4" data-bs-toggle="modal"
+            data-bs-target="#sectorFilterModal" id="sector-filter-btn">
+            Filter
+        </button>
+
+        <div class="d-flex flex-wrap justify-content-center align-items-center gap-3"
+            style="max-width: 1500px; overflow-y: scroll; max-height: 400px;" id="sector-reports-cards">
+        </div>
+    </div>
+
+    <!-- sector filter modal -->
+    <div class="modal fade" id="sectorFilterModal" tabindex="-1" aria-labelledby="sectorFilterModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-black" id="sectorFilterModalLabel">Sectors</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="sectorFilterModalBody" style="max-height: 500px; overflow-y: auto;">
+                    <div class="container-fluid">
+                        <div class="row justify-content-start align-items-start" id="sectorFilterModalInnerBody">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close"
+                        id="sectorFilterModalFooterButton">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Sample JSON data
+        const reports = [
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Personnel failure", "reportDate": "2023-12-31" },
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Equipment failure", "reportDate": "2024-09-01" },
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Accident", "reportDate": "2024-09-03" },
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Lack of supplies", "reportDate": "2024-09-04" },
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Personnel failure", "reportDate": "2024-09-06" },
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Accident", "reportDate": "2024-09-07" },
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Personnel failure", "reportDate": "2024-09-09" },
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Accident", "reportDate": "2024-09-10" },
+            { "reportCount": 5, "sectorName": "Circuit Testing", "problemDescription": "Equipment failure", "reportDate": "2024-09-11" }
+        ];
+
+        const cardContainer = document.querySelector("#sector-reports #sector-reports-cards");
+
+        // Dynamically populate the cards with data
+        reports.forEach(report => {
+            const card = document.createElement("div");
+            card.classList.add("card", "bg-dark", "text-white", "shadow", "mb-3");
+            card.style.width = "18rem";
+            card.innerHTML = `
+                <div class="card-body">
+                    <h5 class="card-title">Sector: ${report.sectorName}</h5>
+                    <p class="card-text"><strong>Problem:</strong> ${report.problemDescription}</p>
+                    <p class="card-text"><strong>Report Count:</strong> ${report.reportCount}</p>
+                    <p class="card-text"><strong>Date:</strong> ${report.reportDate}</p>
+                </div>
+            `;
+            cardContainer.appendChild(card);
+        });
+    </script>
 
     <!-- TOAST SECTION -->
     <div id="danger-toast" class="toast m-1 position-fixed top-0 end-0 bg-danger" role="alert" aria-live="assertive"
