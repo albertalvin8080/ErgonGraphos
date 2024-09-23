@@ -40,7 +40,7 @@ VALUES ('Equipment failure'),
        ('Accident');
 
 INSERT INTO sector (sector_name)
-VALUES ('Printed Circuit Board (PCB) assembly'),
+VALUES ('Printed Circuit Board Assembly'),
        ('Component Soldering'),
        ('Circuit Testing'),
        ('Casing'),

@@ -116,8 +116,8 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="sectorModal" data-bs-backdrop="static" tabindex="-1"
-                aria-labelledby="sectorModalLabel" aria-hidden="true">
+            <div class="modal fade" id="sectorModal" tabindex="-1" aria-labelledby="sectorModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -127,13 +127,13 @@
                         <div class="modal-body" id="sectorModalBody" style="max-height: 500px; overflow-y: auto;">
                             <div class="container-fluid">
                                 <div class="row justify-content-start align-items-start" id="sector-modal-inner-body">
-
+                                    <!-- sectors are dynamically inserted here -->
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close"
-                                id="sectorModalFooterButton">Confirmar</button>
+                            <button type="button" class="btn btn-lg" data-bs-dismiss="modal" aria-label="Close"
+                                id="sectorModalFooterButton">Confirm</button>
                         </div>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
     </div>
 
     <div id="sector-reports"
-        class="flex-grow-1 d-flex justify-content-center align-items-center text-white flex-column my-fade my-absolute">
+        class="flex-grow-1 mt-4 d-flex justify-content-center align-items-center text-white flex-column my-fade my-absolute">
         <div>
             <h2 class="text-center display-3 mb-4">Sector Reports</h2>
         </div>
@@ -154,9 +154,9 @@
             data-bs-target="#sectorFilterModal" id="sector-filter-btn">
             Filter
         </button>
-
-        <div class="d-flex flex-wrap justify-content-center align-items-center gap-3"
-            style="max-width: 1500px; overflow-y: scroll; max-height: 400px;" id="sector-reports-cards">
+        <div class="flex-grow-1 d-flex flex-wrap justify-content-center align-items-start gap-3"
+            style="max-width: 1500px; overflow: visible;" id="sector-reports-cards">
+            <!-- reports are inserted here dynamically -->
         </div>
     </div>
 
@@ -172,49 +172,17 @@
                 <div class="modal-body" id="sectorFilterModalBody" style="max-height: 500px; overflow-y: auto;">
                     <div class="container-fluid">
                         <div class="row justify-content-start align-items-start" id="sectorFilterModalInnerBody">
-
+                            <!-- sectors are dynamically inserted here -->
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close"
-                        id="sectorFilterModalFooterButton">Confirmar</button>
+                    <button type="button" class="btn btn-lg" data-bs-dismiss="modal" aria-label="Close"
+                        id="sectorFilterModalFooterButton">Confirm</button>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        // Sample JSON data
-        const reports = [
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Personnel failure", "reportDate": "2023-12-31" },
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Equipment failure", "reportDate": "2024-09-01" },
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Accident", "reportDate": "2024-09-03" },
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Lack of supplies", "reportDate": "2024-09-04" },
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Personnel failure", "reportDate": "2024-09-06" },
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Accident", "reportDate": "2024-09-07" },
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Personnel failure", "reportDate": "2024-09-09" },
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Accident", "reportDate": "2024-09-10" },
-            { "reportCount": 5, "sectorName": "Circuit Testing", "problemDescription": "Equipment failure", "reportDate": "2024-09-11" }
-        ];
-
-        const cardContainer = document.querySelector("#sector-reports #sector-reports-cards");
-
-        // Dynamically populate the cards with data
-        reports.forEach(report => {
-            const card = document.createElement("div");
-            card.classList.add("card", "bg-dark", "text-white", "shadow", "mb-3");
-            card.style.width = "18rem";
-            card.innerHTML = `
-                <div class="card-body">
-                    <h5 class="card-title">Sector: ${report.sectorName}</h5>
-                    <p class="card-text"><strong>Problem:</strong> ${report.problemDescription}</p>
-                    <p class="card-text"><strong>Report Count:</strong> ${report.reportCount}</p>
-                    <p class="card-text"><strong>Date:</strong> ${report.reportDate}</p>
-                </div>
-            `;
-            cardContainer.appendChild(card);
-        });
-    </script>
 
     <!-- TOAST SECTION -->
     <div id="danger-toast" class="toast m-1 position-fixed top-0 end-0 bg-danger" role="alert" aria-live="assertive"

@@ -11,7 +11,7 @@ const sectorReportsDiv = document.querySelector("#sector-reports");
 const sectorReportsNav = document.querySelector("#sector-reports-nav");
 
 let previousItem = homeDiv; // homeDiv starts visible
-let previousNav = homeNav;  // homeNav starts active
+let previousNav = homeNav; // homeNav starts active
 
 function changeItem(newItem, newNav) {
 	if (newItem === previousItem) return;
@@ -135,7 +135,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const sectorModalBody = document.querySelector("#sector-modal-inner-body");
-const sectorFilterModalBody = document.querySelector("#sectorFilterModalInnerBody");
+const sectorFilterModalBody = document.querySelector(
+	"#sectorFilterModalInnerBody"
+);
 const sectorCheckStringModel = `
 <div class="col-12">
 	<div class="form-check">
@@ -165,6 +167,7 @@ let sectorModalFooterButton = document.querySelector(
 let sectorModal = new bootstrap.Modal(document.getElementById("sectorModal"));
 let sectorModalCheckInputs = null;
 
+// IIFE
 (async function fetchSectors() {
 	let response = null;
 	let sectors = null;
@@ -249,5 +252,62 @@ newEmployeeForm.addEventListener("submit", async (evt) => {
 		showDangerToast("Something bad happened. Try again later.");
 	}
 });
-
 // !------------------- NEW EMPLOYEE -------------------
+
+// ------------------- SECTOR REPORT -------------------
+const cardContainer = document.querySelector(
+	"#sector-reports #sector-reports-cards"
+);
+const sectorFilterModalFooterButton = document.querySelector(
+	"#sectorFilterModalFooterButton"
+);
+
+sectorFilterModalFooterButton.addEventListener("click", async (evt) => {
+	const checkedInput = document.querySelector(
+		"#sectorFilterModalBody :checked"
+	);
+	console.log(checkedInput);
+	let response = null;
+	let reports = null;
+	try {
+		response = await fetch(
+			`http://localhost:8080/sector/daily-report/${checkedInput.value}`,
+			{
+				method: "GET",
+				headers: { Accept: "application/json" },
+			}
+		);
+		reports = await response.json();
+	} catch (e) {
+		console.error(e);
+		reports = [
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Personnel failure", "reportDate": "2023-12-31" },
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Equipment failure", "reportDate": "2024-09-01" },
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Accident", "reportDate": "2024-09-03" },
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Lack of supplies", "reportDate": "2024-09-04" },
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Lack of supplies", "reportDate": "2024-09-04" },
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Personnel failure", "reportDate": "2024-09-06" },
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Accident", "reportDate": "2024-09-07" },
+            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Accident", "reportDate": "2024-09-10" },
+            { "reportCount": 5, "sectorName": "Circuit Testing", "problemDescription": "Equipment failure", "reportDate": "2024-09-11" }
+        ];
+	}
+	// Empty the cardContainer
+	cardContainer.innerHTML = "";
+	reports.forEach((report) => {
+		const card = document.createElement("div");
+		card.classList.add("card", "bg-dark", "text-white", "shadow", "mb-3", "report-card", "card-my-grow");
+		card.style.width = "18rem";
+		card.innerHTML = `
+			<div class="card-body">
+				<h5 class="card-title">Sector: ${report.sectorName}</h5>
+				<p class="card-text"><strong>Problem:</strong> ${report.problemDescription}</p>
+				<p class="card-text"><strong>Report Count:</strong> ${report.reportCount}</p>
+				<p class="card-text"><strong>Date:</strong> ${report.reportDate}</p>
+			</div>
+		`;
+		cardContainer.appendChild(card);
+	});
+});
+// !------------------- SECTOR REPORT -------------------
+

@@ -9,17 +9,18 @@
     --color5: #41856A;
     --color6: #73D2CC;
     --color7: #0c3e70;
-    --color8: #;
+    --color8: #6C0E23;
+    --color9: #96ADC8;
 }
 
-*,
+/* *,
 *::after,
 *::before {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     outline: 0;
-}
+} */
 
 body {
     background-image: linear-gradient(to top right, var(--color1), var(--color2));
@@ -85,7 +86,9 @@ body {
 } */
 
 #new-sector-btn,
-#new-employee-btn {
+#new-employee-btn,
+#sectorModalFooterButton,
+#sectorFilterModalFooterButton {
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     background-color: var(--color6);
@@ -93,7 +96,9 @@ body {
 }
 
 #new-sector-btn:hover,
-#new-employee-btn:hover {
+#new-employee-btn:hover,
+#sectorModalFooterButton:hover,
+#sectorFilterModalFooterButton:hover {
     color: white;
     background-color: var(--color5);
 }
@@ -150,3 +155,88 @@ body {
     z-index: 1045 !important;
     /* Default for the backdrop */
 }
+
+@keyframes my-grow {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.card-my-grow {
+    animation: my-grow 0.5s ease-in-out forwards;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* .report-card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.report-card:hover {
+    transform: translateY(-7px); 
+} */
+
+.card {
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    border-width: 0;
+}
+
+.card-body {
+    /* padding: 20px; */
+    text-align: left;
+    background-color: var(--color8);
+    color: white;
+}
+
+.card h5 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.card-text strong {
+    color: var(--color1);
+}
+
+
+/* ------- SCROLL BAR ------- */
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color2); /* Background color of the scrollbar track */
+    border-radius: 10px; /* Optional: Rounded corners for the track */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color4); /* Scrollbar thumb color */
+    border-radius: 10px; /* Rounded corners for the thumb */
+    border: 3px solid var(--color2); /* Optional: Adds padding between thumb and track */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color5); /* Thumb color on hover */
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin; /* Makes the scrollbar thinner */
+    scrollbar-color: var(--color4) var(--color1); /* Thumb and track color */
+}
+
+
