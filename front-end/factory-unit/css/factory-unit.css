@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+.btn {
+    height: 120px;
+    font-size: 2.5rem;
+}
+
+.breadcrumb {
+    background-color: black;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}
+
+.breadcrumb-item {
+    position: relative;
+    margin: 0 5px;
+    padding: 5px 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.breadcrumb-item.active {
+    background-color: white;
+    border-radius: 10px;
+}
+
+.breadcrumb-item.passed {
+    color: #d3d3d3;
+}
+
+.my-fixed {
+    position: fixed;
+    height: 0px;
+    /* This prevents the hidden tab size from messing with the layout */
+}
+
+.my-fade {
+    opacity: 0;
+    /* Unfortunately, this makes the modal to behave incorrectly. */
+    /* transform: translateY(-25px);  */
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    visibility: hidden;
+}
+
+.my-fade.my-show {
+    opacity: 1;
+    /* Unfortunately, this makes the modal to behave incorrectly. */
+    /* transform: translateY(0); */
+    visibility: visible;
+}

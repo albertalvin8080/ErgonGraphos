@@ -48,4 +48,9 @@ public class EmployeeService
             return new ArrayList<>();
         }
     }
+
+    public List<Employee> filterBySector(Integer sectorId)
+    {
+        return employeeRepository.filterBySector(sectorId);
+    }
 }

@@ -51,6 +51,20 @@ public class EmployeeRepository implements IRepository<Employee, Integer>
         return null;
     }
 
+    public List<Employee> filterBySector(Integer sectorId)
+    {
+        List<Employee> employeeList = new ArrayList<>();
+        String sql = """
+                SELECT * 
+                FROM 
+                    employee e 
+                WHERE 
+                    e.employee_sector_id = ?
+                GROUP BY
+                    e.employee_name;
+                """;
+    }
+
     @Override
     public List<Employee> readAll() throws SQLException
     {

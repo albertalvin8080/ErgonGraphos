@@ -105,7 +105,7 @@ body {
 
 .my-absolute {
     position: absolute;
-    height: 0px;
+    height: 0px !important;
     /* This prevents the hidden tab size from messing with the layout */
 }
 
@@ -173,13 +173,13 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* .report-card {
-    transition: transform 0.3s ease-in-out;
+.report-card {
+    transition: transform 0.3s ease;
 }
 
 .report-card:hover {
     transform: translateY(-7px); 
-} */
+}
 
 .card {
     border-radius: 10px;
@@ -211,6 +211,11 @@ body {
     color: var(--color1);
 }
 
+
+.accordion-collapse
+{
+    overflow: hidden; /* Prevents the background from overlapping the border */
+}
 
 /* ------- SCROLL BAR ------- */
 /* Scrollbar styles */

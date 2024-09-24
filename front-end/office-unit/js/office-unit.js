@@ -280,23 +280,78 @@ sectorFilterModalFooterButton.addEventListener("click", async (evt) => {
 		reports = await response.json();
 	} catch (e) {
 		console.error(e);
+		// Mock reports
 		reports = [
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Personnel failure", "reportDate": "2023-12-31" },
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Equipment failure", "reportDate": "2024-09-01" },
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Accident", "reportDate": "2024-09-03" },
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Lack of supplies", "reportDate": "2024-09-04" },
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Lack of supplies", "reportDate": "2024-09-04" },
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Personnel failure", "reportDate": "2024-09-06" },
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Accident", "reportDate": "2024-09-07" },
-            { "reportCount": 1, "sectorName": "Circuit Testing", "problemDescription": "Accident", "reportDate": "2024-09-10" },
-            { "reportCount": 5, "sectorName": "Circuit Testing", "problemDescription": "Equipment failure", "reportDate": "2024-09-11" }
-        ];
+			{
+				reportCount: 1,
+				sectorName: "Circuit Testing",
+				problemDescription: "Personnel failure",
+				reportDate: "2023-12-31",
+			},
+			{
+				reportCount: 1,
+				sectorName: "Circuit Testing",
+				problemDescription: "Equipment failure",
+				reportDate: "2024-09-01",
+			},
+			{
+				reportCount: 1,
+				sectorName: "Circuit Testing",
+				problemDescription: "Accident",
+				reportDate: "2024-09-03",
+			},
+			{
+				reportCount: 1,
+				sectorName: "Circuit Testing",
+				problemDescription: "Lack of supplies",
+				reportDate: "2024-09-04",
+			},
+			{
+				reportCount: 1,
+				sectorName: "Circuit Testing",
+				problemDescription: "Lack of supplies",
+				reportDate: "2024-09-04",
+			},
+			{
+				reportCount: 1,
+				sectorName: "Circuit Testing",
+				problemDescription: "Personnel failure",
+				reportDate: "2024-09-06",
+			},
+			{
+				reportCount: 1,
+				sectorName: "Circuit Testing",
+				problemDescription: "Accident",
+				reportDate: "2024-09-07",
+			},
+			{
+				reportCount: 1,
+				sectorName: "Circuit Testing",
+				problemDescription: "Accident",
+				reportDate: "2024-09-10",
+			},
+			{
+				reportCount: 5,
+				sectorName: "Circuit Testing",
+				problemDescription: "Equipment failure",
+				reportDate: "2024-09-11",
+			},
+		];
 	}
 	// Empty the cardContainer
 	cardContainer.innerHTML = "";
+	let cardAnimations = [];
 	reports.forEach((report) => {
 		const card = document.createElement("div");
-		card.classList.add("card", "bg-dark", "text-white", "shadow", "mb-3", "report-card", "card-my-grow");
+		card.classList.add(
+			"card",
+			"bg-dark",
+			"text-white",
+			"shadow",
+			"mb-3",
+			"report-card",
+			"card-my-grow"
+		);
 		card.style.width = "18rem";
 		card.innerHTML = `
 			<div class="card-body">
@@ -307,7 +362,12 @@ sectorFilterModalFooterButton.addEventListener("click", async (evt) => {
 			</div>
 		`;
 		cardContainer.appendChild(card);
+		cardAnimations.push(card);
 	});
+	setTimeout(() => {
+		cardAnimations.forEach((c) => {
+			c.classList.remove("card-my-grow");
+		});
+	}, 600);
 });
 // !------------------- SECTOR REPORT -------------------
-

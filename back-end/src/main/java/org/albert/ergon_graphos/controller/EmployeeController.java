@@ -26,6 +26,13 @@ public class EmployeeController
         return ResponseEntity.ok(employeeList);
     }
 
+    @GetMapping(path = "/sector/{id}")
+    public ResponseEntity<List<Employee>> filterBySector(@PathVariable("id") Integer id)
+    {
+        employeeService.filterBySector(id);
+        return ResponseEntity.ok();
+    }
+
     @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> create(@RequestBody EmployeeDto employeeDto)
     {
