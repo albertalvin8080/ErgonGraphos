@@ -113,6 +113,7 @@ newSectorForm.addEventListener("submit", async (evt) => {
 
 	if (response.status === 201) {
 		showSuccesToast("Sector succesfully registered!");
+		fetchSectors(); // Update the sectors avalibale inside the modals
 		homeNav.click();
 	} else {
 		showDangerToast("Something bad happened. Try again later.");
@@ -167,7 +168,7 @@ let sectorModal = new bootstrap.Modal(document.getElementById("sectorModal"));
 let sectorModalCheckInputs = null;
 
 // IIFE
-(async function fetchSectors() {
+async function fetchSectors() {
 	let response = null;
 	let sectors = null;
 	try {
@@ -193,6 +194,8 @@ let sectorModalCheckInputs = null;
 	}
 
 	console.log(sectors);
+	sectorModalBody.innerHTML = "";
+	sectorFilterModalBody.innerHTML = "";
 
 	sectors.forEach((sector) => {
 		const div1 = sectorCheckStringModel
@@ -209,7 +212,8 @@ let sectorModalCheckInputs = null;
 	sectorModalCheckInputs = [
 		...document.querySelectorAll("#sectorModalBody .form-check-input"),
 	];
-})();
+};
+fetchSectors();
 
 sectorModalFooterButton.addEventListener("click", (e) => {
 	if (sectorModalCheckInputs.some((i) => i.checked)) {
@@ -354,7 +358,7 @@ sectorFilterModalFooterButton.addEventListener("click", async (evt) => {
 		card.style.width = "18rem";
 		card.innerHTML = `
 			<div class="card-body">
-				<h5 class="card-title">Sector: ${report.sectorName}</h5>
+				<h5 class="card-title">Sector<br><span class="text-warning">${report.sectorName}</span></h5>
 				<p class="card-text"><strong>Problem:</strong> ${report.problemDescription}</p>
 				<p class="card-text"><strong>Report Count:</strong> ${report.reportCount}</p>
 				<p class="card-text"><strong>Date:</strong> ${report.reportDate}</p>

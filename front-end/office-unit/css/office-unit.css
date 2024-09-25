@@ -222,4 +222,13 @@ body {
 }
 
 
+#sector-filter-btn
+{
+    background-color: var(--color7);
+    border: 0;
+}
 
+#sector-filter-btn:hover
+{
+    background-color: var(--color3);
+}

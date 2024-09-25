@@ -27,10 +27,13 @@ body {
 .btn {
     height: 120px;
     font-size: 2.5rem;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     line-height: 1;
     overflow: hidden;
+    border: 0;
 }
 
 .btn-primary
@@ -87,3 +90,13 @@ body {
     visibility: visible !important;
 }
 
+.profile-img
+{
+    height: 100%;
+    display: block;
+}
+
+.profile-name
+{
+    flex-grow: 1;
+}

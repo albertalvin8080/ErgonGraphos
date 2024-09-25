@@ -137,8 +137,17 @@ async function initEmployees() {
 		colDiv.classList.add("col-6");
 
 		const btn = document.createElement("button");
-		btn.classList.add("btn", "btn-primary");
-		btn.innerText = e.name;
+		btn.classList.add("btn", "btn-primary", "p-0");
+
+		const img = document.createElement("img");
+		img.classList.add("profile-img");
+		img.src = "img/blank-profile-picture.png";
+		btn.appendChild(img);
+
+		const text = document.createElement("div");
+		text.classList.add("profile-name");
+		text.innerText = e.name;
+		btn.appendChild(text);
 		btn.employeeId = e.id;
 
 		btn.addEventListener("click", (evt) => {
@@ -204,8 +213,7 @@ function resetVariables() {
 	init();
 }
 
-function resetStyle()
-{
+function resetStyle() {
 	sectorBreadcrumb.classList.remove("passed");
 	employeeBreadcrumb.classList.remove("passed");
 	problemBreadcrumb.classList.remove("passed");
