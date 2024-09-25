@@ -10,5 +10,5 @@ import lombok.*;
 public class Problem
 {
     private Integer id;
-    private String name;
+    private String description;
 }

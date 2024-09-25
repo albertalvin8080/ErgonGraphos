@@ -51,18 +51,44 @@ public class EmployeeRepository implements IRepository<Employee, Integer>
         return null;
     }
 
-    public List<Employee> filterBySector(Integer sectorId)
+    public List<Employee> filterBySector(Integer sectorId) throws SQLException
     {
         List<Employee> employeeList = new ArrayList<>();
         String sql = """
                 SELECT * 
                 FROM 
                     employee e 
+                INNER JOIN 
+                    sector s
+                ON 
+                    e.employee_sector_id = s.sector_id
                 WHERE 
                     e.employee_sector_id = ?
-                GROUP BY
+                ORDER BY
                     e.employee_name;
                 """;
+
+        try(PreparedStatement pstm = ConnectionFactory.getConnection().prepareStatement(sql))
+        {
+            pstm.setInt(1, sectorId);
+            final ResultSet resultSet = pstm.executeQuery();
+            while(resultSet.next())
+            {
+                final Employee employee = Employee.builder()
+                        .id(resultSet.getInt("employee_id"))
+                        .name(resultSet.getString("employee_name"))
+                        .sector(
+                                Sector.builder()
+                                        .id(resultSet.getInt("sector_id"))
+                                        .name(resultSet.getString("sector_name"))
+                                        .build()
+                        )
+                        .build();
+                employeeList.add(employee);
+            }
+        }
+
+        return employeeList;
     }
 
     @Override

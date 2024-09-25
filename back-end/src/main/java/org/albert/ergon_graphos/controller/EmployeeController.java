@@ -29,14 +29,14 @@ public class EmployeeController
     @GetMapping(path = "/sector/{id}")
     public ResponseEntity<List<Employee>> filterBySector(@PathVariable("id") Integer id)
     {
-        employeeService.filterBySector(id);
-        return ResponseEntity.ok();
+        final List<Employee> employeeList = employeeService.filterBySector(id);
+        return ResponseEntity.ok(employeeList);
     }
 
     @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> create(@RequestBody EmployeeDto employeeDto)
     {
-        System.out.println(employeeDto);
+//        System.out.println(employeeDto);
         employeeService.create(employeeDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

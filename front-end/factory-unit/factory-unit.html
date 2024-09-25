@@ -11,23 +11,23 @@
     <link rel="stylesheet" href="css/factory-unit.css">
 </head>
 
-<body class="d-flex vh-100 justify-content-center align-items-center flex-column gap-5">
+<body class="py-5 d-flex h-100 justify-content-center align-items-center flex-column gap-5">
 
     <nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item passed">
+            <li class="breadcrumb-item active" id="sector-breadcrumb">
                 <div>Sector</div>
             </li>
             <li class="breadcrumb-item">
                 <div><i class="bi bi-caret-right-fill fs-5"></i></div>
             </li>
-            <li class="breadcrumb-item passed">
+            <li class="breadcrumb-item" id="employee-breadcrumb">
                 <div>Employee</div>
             </li>
             <li class="breadcrumb-item">
                 <div><i class="bi bi-caret-right-fill fs-5"></i></div>
             </li>
-            <li class="breadcrumb-item active">
+            <li class="breadcrumb-item" id="problem-breadcrumb">
                 <div>Problem</div>
             </li>
             <li class="breadcrumb-item">
@@ -39,50 +39,37 @@
         </ol>
     </nav>
 
-    <div class="container-xl" id="problem-selector">
+    <div class="container-xl my-fade my-show" id="sector-selector">
         <div class="row justify-content-center align-items-center g-5">
-            <div class="col-6">
-                <button class="d-block btn btn-primary w-100" type="button">Problem 1</button>
-            </div>
-            <div class="col-6">
-                <button class="d-block btn btn-primary w-100" type="button">Problem 2</button>
-            </div>
-            <div class="col-6">
-                <button class="d-block btn btn-primary w-100" type="button">Problem 3</button>
-            </div>
-            <div class="col-6">
-                <button class="d-block btn btn-primary w-100" type="button">Problem 4</button>
-            </div>
-            <div class="col-6">
-                <button class="d-block btn btn-primary w-100" type="button">Problem 5</button>
-            </div>
+            <!-- <div class="col-6">
+                <button class="btn btn-primary" type="button">Sector 1</button>
+            </div>-->
         </div>
     </div>
 
-    <div class="container-xl my-fade my-fixed" id="sector-selector">
+    <div class="container-xl my-fade my-fixed" id="employee-selector">
         <div class="row justify-content-center align-items-center g-5">
-            <div class="col-6">
-                <button class="d-block btn btn-primary w-100" type="button">Problem 1</button>
+            <!-- <div class="col-6">
+                <button class="btn btn-primary" type="button">Employee 1</button>
             </div>
             <div class="col-6">
-                <button class="d-block btn btn-primary w-100" type="button">Problem 2</button>
-            </div>
-            <div class="col-6">
-                <button class="d-block btn btn-primary w-100" type="button">Problem 3</button>
-            </div>
-            <div class="col-6">
-                <button class="d-block btn btn-primary w-100" type="button">Problem 4</button>
-            </div>
-            <div class="col-6">
-                <button class="d-block btn btn-primary w-100" type="button">Problem 5</button>
-            </div>
+                <button class="btn btn-primary" type="button">Employee 2</button>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="container-xl my-fade my-fixed" id="problem-selector">
+        <div class="row justify-content-center align-items-center g-5">
+            <!-- <div class="col-6">
+                <button class="btn btn-primary" type="button">Problem 1</button>
+            </div> -->
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script src="js/factory-unit.html"></script>
+    <script src="js/factory-unit.js"></script>
 </body>
 
 </html>

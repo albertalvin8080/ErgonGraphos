@@ -51,6 +51,13 @@ public class EmployeeService
 
     public List<Employee> filterBySector(Integer sectorId)
     {
-        return employeeRepository.filterBySector(sectorId);
+        try
+        {
+            return employeeRepository.filterBySector(sectorId);
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 }

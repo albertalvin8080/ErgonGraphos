@@ -3,6 +3,10 @@
 .btn {
     height: 120px;
     font-size: 2.5rem;
+    display: block;
+    width: 100%;
+    line-height: 1;
+    overflow: hidden;
 }
 
 .breadcrumb {
@@ -33,8 +37,8 @@
 }
 
 .my-fixed {
-    position: fixed;
-    height: 0px;
+    position: fixed !important;
+    height: 0px !important;
     /* This prevents the hidden tab size from messing with the layout */
 }
 
@@ -43,12 +47,12 @@
     /* Unfortunately, this makes the modal to behave incorrectly. */
     /* transform: translateY(-25px);  */
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-    visibility: hidden;
+    visibility: hidden !important;
 }
 
 .my-fade.my-show {
     opacity: 1;
     /* Unfortunately, this makes the modal to behave incorrectly. */
     /* transform: translateY(0); */
-    visibility: visible;
+    visibility: visible !important;
 }
