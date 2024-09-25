@@ -11,6 +11,10 @@
     --color7: #0c3e70;
     --color8: #6C0E23;
     --color9: #96ADC8;
+    --color10: #0D6EFD;
+    --color11: #0B5ED7;
+    --color12:  #bbbbbb;
+    --color13: #306cc5;
 }
 
 /* *,
@@ -64,7 +68,7 @@ body {
 .accordion-item,
 .accordion-button {
     color: white;
-    background-color: var(--color4);
+    background-color: var(--color7);
 }
 
 .accordion-body {

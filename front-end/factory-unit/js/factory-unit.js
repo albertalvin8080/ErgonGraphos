@@ -1,8 +1,34 @@
 "use strict";
 
+// ------------------- TOAST -------------------
+const dangerToast = new bootstrap.Toast(
+	document.querySelector("#danger-toast")
+);
+const dangerToastBody = document.querySelector("#danger-toast .toast-body");
+const successToast = new bootstrap.Toast(
+	document.querySelector("#success-toast")
+);
+const successToastBody = document.querySelector("#success-toast .toast-body");
+
+function showDangerToast(msg) {
+	dangerToastBody.innerText = msg;
+	dangerToast.show();
+}
+
+function showSuccesToast(msg) {
+	successToastBody.innerText = msg;
+	successToast.show();
+}
+// !------------------- TOAST -------------------
+
+// -------------- SELECTORS --------------
 let sectorId = null;
 let employeeId = null;
 let problemId = null;
+
+const sectorSelectorRow = document.querySelector("#sector-selector .row");
+const employeeSelectorRow = document.querySelector("#employee-selector .row");
+const problemSelectorRow = document.querySelector("#problem-selector .row");
 
 const sectorSelector = document.querySelector("#sector-selector");
 const sectorBreadcrumb = document.querySelector("#sector-breadcrumb");
@@ -29,33 +55,44 @@ function nextItem(newItem, newBreadcrumb) {
 	previousItem.classList.add("my-show");
 }
 
-async function sectorButtonPressed(btnTarget) {
+function sectorButtonPressed(btnTarget) {
 	sectorId = btnTarget.sectorId;
-	await initEmployees();
 	nextItem(employeeSelector, employeeBreadcrumb);
+	initEmployees();
 }
 
-async function employeeButtonPressed(btnTarget) {
+function employeeButtonPressed(btnTarget) {
 	employeeId = btnTarget.employeeId;
 	nextItem(problemSelector, problemBreadcrumb);
 }
 
 async function problemButtonPressed(btnTarget) {
 	problemId = btnTarget.problemId;
-	// nextItem(problemSelector, problemBreadcrumb);
+	reportProblem();
+	resetVariables();
+	nextItem(sectorSelector, sectorBreadcrumb);
+	resetStyle(); // resetStyle() must be called after nextItem() because it will add "passed" to the breadcrumb
 }
 
-// -------------- SECTORS --------------
-const sectorSelectorRow = document.querySelector("#sector-selector .row");
-const employeeSelectorRow = document.querySelector("#employee-selector .row");
-const problemSelectorRow = document.querySelector("#problem-selector .row");
-
 async function initProblems() {
-	const response = await fetch(`http://localhost:8080/problem/all`, {
-		method: "GET",
-		headers: { Accept: "application/json;charset=utf-8" },
-	});
-	const problems = await response.json();
+	let problems = null;
+	try {
+		const response = await fetch(`http://localhost:8080/problem/all`, {
+			method: "GET",
+			headers: { Accept: "application/json;charset=utf-8" },
+		});
+		problems = await response.json();
+	} catch (e) {
+		console.error(e);
+		problems = [
+			{ id: 1, description: "Mock 1" },
+			{ id: 1, description: "Mock 2" },
+			{ id: 1, description: "Mock 3" },
+			{ id: 1, description: "Mock 4" },
+			{ id: 1, description: "Mock 5" },
+			{ id: 1, description: "Mock 6" },
+		];
+	}
 	problems.forEach((p) => {
 		const colDiv = document.createElement("div");
 		colDiv.classList.add("col-6");
@@ -75,14 +112,26 @@ async function initProblems() {
 }
 
 async function initEmployees() {
-	const response = await fetch(
-		`http://localhost:8080/employee/sector/${sectorId}`,
-		{
-			method: "GET",
-			headers: { Accept: "application/json;charset=utf-8" },
-		}
-	);
-	const employees = await response.json();
+	let employees = null;
+	try {
+		const response = await fetch(
+			`http://localhost:8080/employee/sector/${sectorId}`,
+			{
+				method: "GET",
+				headers: { Accept: "application/json;charset=utf-8" },
+			}
+		);
+		employees = await response.json();
+	} catch (e) {
+		console.error(e);
+		employees = [
+			{ id: 1, name: "Mock 1" },
+			{ id: 1, name: "Mock 2" },
+			{ id: 1, name: "Mock 3" },
+			{ id: 1, name: "Mock 4" },
+			{ id: 1, name: "Mock 5" },
+		];
+	}
 	employees.forEach((e) => {
 		const colDiv = document.createElement("div");
 		colDiv.classList.add("col-6");
@@ -102,11 +151,23 @@ async function initEmployees() {
 }
 
 async function initSectors() {
-	const response = await fetch("http://localhost:8080/sector/all", {
-		method: "GET",
-		headers: { Accept: "application/json;charset=utf-8" },
-	});
-	const sectors = await response.json();
+	let sectors = null;
+	try {
+		const response = await fetch("http://localhost:8080/sector/all", {
+			method: "GET",
+			headers: { Accept: "application/json;charset=utf-8" },
+		});
+		sectors = await response.json();
+	} catch (e) {
+		console.error(e);
+		sectors = [
+			{ id: 1, name: "Mock 1" },
+			{ id: 1, name: "Mock 2" },
+			{ id: 1, name: "Mock 3" },
+			{ id: 1, name: "Mock 4" },
+			{ id: 1, name: "Mock 5" },
+		];
+	}
 	sectors.forEach((s) => {
 		const colDiv = document.createElement("div");
 		colDiv.classList.add("col-6");
@@ -124,10 +185,49 @@ async function initSectors() {
 		sectorSelectorRow.appendChild(colDiv);
 	});
 }
-// !-------------- SECTORS --------------
+// !-------------- SELECTORS --------------
 
-(async function () {
-	await initSectors();
+async function init() {
+	initSectors();
 	// await initEmployees(); // May only be initialized after the sector is choosen by the user.
-	await initProblems();
-})();
+	initProblems();
+}
+init();
+
+function resetVariables() {
+	sectorId = null;
+	employeeId = null;
+	problemId = null;
+	sectorSelectorRow.innerHTML = "";
+	employeeSelectorRow.innerHTML = "";
+	problemSelectorRow.innerHTML = "";
+	init();
+}
+
+function resetStyle()
+{
+	sectorBreadcrumb.classList.remove("passed");
+	employeeBreadcrumb.classList.remove("passed");
+	problemBreadcrumb.classList.remove("passed");
+}
+
+async function reportProblem() {
+	let response = null;
+	try {
+		response = await fetch("http://localhost:8080/report/create", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ employeeId, problemId }),
+		});
+	} catch (e) {
+		console.error(e);
+		showDangerToast("Something bad occured. Try again later.");
+		return;
+	}
+
+	if (response.status === 201) {
+		showSuccesToast("Thank you for your feedback!");
+	} else {
+		showDangerToast("Something bad occured. Try again later.");
+	}
+}

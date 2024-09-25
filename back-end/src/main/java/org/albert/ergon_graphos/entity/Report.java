@@ -15,7 +15,7 @@ public class Report
     private Integer id;
     private Date date;
     private Employee employee;
-    private Sector sector;
+    private Problem problem;
 
     public String getDateFormatted()
     {

@@ -66,7 +66,6 @@ function showSuccesToast(msg) {
 	successToastBody.innerText = msg;
 	successToast.show();
 }
-
 // !------------------- TOAST -------------------
 
 const newSectorForm = document.querySelector("#new-sector-form");
