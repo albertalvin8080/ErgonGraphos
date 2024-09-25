@@ -1,5 +1,28 @@
 @charset "utf-8";
 
+:root {
+    --color0: #f6e8ca;
+    --color1: #EAD8B1;
+    --color2: #001F3F;
+    --color3: #3A6D8C;
+    --color4: #6A9AB0;
+    --color5: #41856A;
+    --color6: #73D2CC;
+    --color7: #0c3e70;
+    --color8: #6C0E23;
+    --color9: #96ADC8;
+    --color10: #0D6EFD;
+    --color11: #0B5ED7;
+    --color12:  #bbbbbb;
+}
+
+body {
+    background-image: linear-gradient(to top right, var(--color1), var(--color2));
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
 .btn {
     height: 120px;
     font-size: 2.5rem;
@@ -7,6 +30,12 @@
     width: 100%;
     line-height: 1;
     overflow: hidden;
+}
+
+.btn-primary
+{
+    background-image: linear-gradient(to bottom, var(--color10), var(--color11)) !important;
+    /* border: 0.1px solid rgb(174, 174, 174); */
 }
 
 .breadcrumb {
@@ -33,7 +62,7 @@
 }
 
 .breadcrumb-item.passed {
-    color: #d3d3d3;
+    color:  var(--color12);
 }
 
 .my-fixed {
@@ -56,3 +85,4 @@
     /* transform: translateY(0); */
     visibility: visible !important;
 }
+
