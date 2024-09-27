@@ -39,12 +39,6 @@ public class SectorController
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Sector> read(@PathVariable("id") Integer id)
-    {
-        return ResponseEntity.ok().build();
-    }
-
     @GetMapping(path = "/daily-report/{id}")
     public ResponseEntity<List<SectorDailyReport>> readSectorDailyReport(@PathVariable("id") Integer id)
     {

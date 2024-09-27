@@ -5,7 +5,9 @@ import org.albert.ergon_graphos.entity.Employee;
 import org.albert.ergon_graphos.entity.Sector;
 import org.albert.ergon_graphos.entity.dto.EmployeeDto;
 import org.albert.ergon_graphos.repository.EmployeeRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,7 +34,8 @@ public class EmployeeService
         }
         catch (SQLException e)
         {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -45,7 +48,7 @@ public class EmployeeService
         catch (SQLException e)
         {
             e.printStackTrace();
-            return new ArrayList<>();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -57,7 +60,8 @@ public class EmployeeService
         }
         catch (SQLException e)
         {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
