@@ -13,7 +13,7 @@
 
 ## Project Overview
 
-**ErgonGraphos** is a system that aims to allow the reporting of problems in sectors of a computer factory in a fast and concise way.
+ErgonGraphos is a system designed to streamline the reporting of issues within various sectors of a computer manufacturing facility. It enables quick and precise problem reporting, enhancing overall efficiency and communication.
 
 ## Used Technologies
 
