@@ -21,5 +21,7 @@
   - Spring Boot
   - Docker
 - Front-End
-  - HTML, CSS and JavaScript
+  - HTML
+  - CSS
+  - JavaScript
   - Bootstrap
